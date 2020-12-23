@@ -1,16 +1,42 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+			contacts: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					id: "1733",
+					agenda_slug: "hamzas_awesome_agenda",
+					full_name: "Dave Bradley",
+					email: "dave@gmail.com",
+					phone: "7864445566",
+					address: "47568 NW 34ST, 33434 FL, USA",
+					created_at: "2020-12-22 23:55:32"
 				},
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					id: "1733",
+					agenda_slug: "hamzas_awesome_agenda",
+					full_name: "Dave Bradley",
+					email: "dave@gmail.com",
+					phone: "7864445566",
+					address: "47568 NW 34ST, 33434 FL, USA",
+					created_at: "2020-12-22 23:55:32"
+				},
+				{
+					id: "1733",
+					agenda_slug: "hamzas_awesome_agenda",
+					full_name: "Dave Bradley",
+					email: "dave@gmail.com",
+					phone: "7864445566",
+					address: "47568 NW 34ST, 33434 FL, USA",
+					created_at: "2020-12-22 23:55:32"
+				},
+				{
+					id: "1733",
+					agenda_slug: "hamzas_awesome_agenda",
+					full_name: "Dave Bradley",
+					email: "dave@gmail.com",
+					phone: "7864445566",
+					address: "47568 NW 34ST, 33434 FL, USA",
+					created_at: "2020-12-22 23:55:32"
 				}
 			]
 		},
