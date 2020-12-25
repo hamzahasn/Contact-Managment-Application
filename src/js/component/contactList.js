@@ -52,7 +52,9 @@ export const ContactList = props => {
 							<div className="col-2">
 								<ul className="list-unstyled list-inline">
 									<li className="list-inline-item">
-										<i className="fas fa-pencil-alt" />
+										<Link to={`/edit/${index}`}>
+											<i className="fas fa-pencil-alt" />
+										</Link>
 									</li>
 									<li className="list-inline-item">
 										<i className="fas fa-trash-alt" />
