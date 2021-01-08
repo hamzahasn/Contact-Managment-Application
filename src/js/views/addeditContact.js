@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, ContactList, useHistory } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -8,19 +8,21 @@ import "../../styles/demo.scss";
 export const AddEditContact = () => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	let history = useHistory();
 	const theid = params.theid;
+	console.log(theid);
 
-	const [name, setName] = useState[typeof theid !== "undefined" ? store.contacts[theid].full_name : null];
-	const [email, setEmail] = useState[typeof theid !== "undefined" ? store.contacts[theid].email : null];
-	const [phone, setPhone] = useState[typeof theid !== "undefined" ? store.contacts[theid].phone : null];
-	const [address, setAddress] = useState[typeof theid !== "undefined" ? store.contacts[theid].address : null];
+	const [name, setName] = useState(typeof theid !== "undefined" ? store.contacts[theid].full_name : null);
+	const [email, setEmail] = useState(typeof theid !== "undefined" ? store.contacts[theid].email : null);
+	const [phone, setPhone] = useState(typeof theid !== "undefined" ? store.contacts[theid].phone : null);
+	const [address, setAddress] = useState(typeof theid !== "undefined" ? store.contacts[theid].address : null);
 
 	useEffect(
 		() => {
-			if (typeof theid === "undefined") {
+			if (theid === "undefined") {
 				setName("");
 				setEmail("");
-				setPho("");
+				setPhone("");
 				setAddress("");
 			}
 		},
@@ -29,7 +31,7 @@ export const AddEditContact = () => {
 
 	return (
 		<div className="container">
-			<form onSubmit={e => e.preventDefault()}>
+			<form onSubmit={e => e.preventDefault()} className="mb-1">
 				<div className="mb-3">
 					<label htmlFor="fullName" className="form-label">
 						Full name
@@ -50,7 +52,7 @@ export const AddEditContact = () => {
 						type="email"
 						className="form-control"
 						id="form-control"
-						id="email"
+						email="email"
 						value={email}
 						onChange={e => setEmail(e.target.value)}
 					/>
@@ -79,10 +81,23 @@ export const AddEditContact = () => {
 						onChange={e => setAddress(e.target.value)}
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary">
+				<button
+					onClick={e =>
+						actions.addContact({
+							agenda_slug: "hamzas_awesome_agenda",
+							full_name: name,
+							email: email,
+							phone: phone,
+							address: address
+						})
+					}
+					type="submit"
+					className="btn btn-primary">
 					Submit
 				</button>
 			</form>
+			<Link to="/">Return Home</Link>
+			{/* <button onClick={e => history.push("/")}>go somewhere</button> */}
 		</div>
 	);
 };

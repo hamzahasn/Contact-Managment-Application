@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const Navbar = () => {
+	const params = useParams();
+	const theid = params.theid;
+	console.log(theid);
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<span className="container">

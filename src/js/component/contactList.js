@@ -8,63 +8,70 @@ export const ContactList = props => {
 	const params = useParams();
 
 	return (
-		<ul className="list-group container">
-			{store.contacts.map((contact, index) => {
-				return (
-					<li className="list-group-item" key={index}>
-						<div className="row">
-							<div className="col-2">
-								<img
-									src="https://www.flaticon.com/svg/static/icons/svg/236/236832.svg"
-									alt="contact Avatar"
-									className="rounded-circle img-fluid"
-								/>
-							</div>
-							<div className="col-8 text-left">
-								<h5>{contact.full_name}</h5>
-								<ul className="list-unstyled">
-									<li>
-										<div className="row">
-											<div className="col">
-												<i className="fas fa-map-marker-alt" />
+		<>
+			<ul className="list-group container">
+				{store.contacts.map((contact, index) => {
+					return (
+						<li className="list-group-item" key={index}>
+							<div className="row">
+								<div className="col-2">
+									<img
+										src="https://www.flaticon.com/svg/static/icons/svg/236/236832.svg"
+										alt="contact Avatar"
+										className="rounded-circle img-fluid"
+									/>
+								</div>
+								<div className="col-8 text-left">
+									<h5>{contact.full_name}</h5>
+									<ul className="list-unstyled">
+										<li>
+											<div className="row">
+												<div className="col">
+													<i className="fas fa-map-marker-alt" />
+												</div>
+												<div className="col-11">{contact.address}</div>
 											</div>
-											<div className="col-11">{contact.address}</div>
-										</div>
-									</li>
-									<li>
-										<div className="row">
-											<div className="col">
-												<i className="fas fa-phone" />
+										</li>
+										<li>
+											<div className="row">
+												<div className="col">
+													<i className="fas fa-phone" />
+												</div>
+												<div className="col-11">{contact.phone}</div>
 											</div>
-											<div className="col-11">{contact.phone}</div>
-										</div>
-									</li>
-									<li>
-										<div className="row">
-											<div className="col">
-												<i className="fas fa-envelope" />
+										</li>
+										<li>
+											<div className="row">
+												<div className="col">
+													<i className="fas fa-envelope" />
+												</div>
+												<div className="col-11">{contact.email}</div>
 											</div>
-											<div className="col-11">{contact.email}</div>
-										</div>
-									</li>
-								</ul>
+										</li>
+									</ul>
+								</div>
+								<div className="col-2">
+									<ul className="list-unstyled list-inline">
+										<li className="list-inline-item">
+											<Link to={`/edit/${index}`}>
+												<i className="fas fa-pencil-alt" />
+											</Link>
+										</li>
+										<li className="list-inline-item">
+											<Link to={`#`}>
+												<i
+													className="fas fa-trash-alt"
+													onClick={e => actions.deleteContact(contact.id)}
+												/>
+											</Link>
+										</li>
+									</ul>
+								</div>
 							</div>
-							<div className="col-2">
-								<ul className="list-unstyled list-inline">
-									<li className="list-inline-item">
-										<Link to={`/edit/${index}`}>
-											<i className="fas fa-pencil-alt" />
-										</Link>
-									</li>
-									<li className="list-inline-item">
-										<i className="fas fa-trash-alt" />
-									</li>
-								</ul>
-							</div>
-						</div>
-					</li>
-				);
-			})}
-		</ul>
+						</li>
+					);
+				})}
+			</ul>
+		</>
 	);
 };

@@ -1,54 +1,52 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const baseURL = "https://assets.breatheco.de/apis/fake/contact";
+	const agenda_slug = "hamzas_awesome_agenda";
 	return {
 		store: {
-			contacts: [
-				{
-					id: "1733",
-					agenda_slug: "hamzas_awesome_agenda",
-					full_name: "Dave Bradley",
-					email: "dave@gmail.com",
-					phone: "7864445566",
-					address: "47568 NW 34ST, 33434 FL, USA",
-					created_at: "2020-12-22 23:55:32"
-				},
-				{
-					id: "1733",
-					agenda_slug: "hamzas_awesome_agenda",
-					full_name: "Dave Bradley",
-					email: "dave@gmail.com",
-					phone: "7864445566",
-					address: "47568 NW 34ST, 33434 FL, USA",
-					created_at: "2020-12-22 23:55:32"
-				},
-				{
-					id: "1733",
-					agenda_slug: "hamzas_awesome_agenda",
-					full_name: "Dave Bradley",
-					email: "dave@gmail.com",
-					phone: "7864445566",
-					address: "47568 NW 34ST, 33434 FL, USA",
-					created_at: "2020-12-22 23:55:32"
-				},
-				{
-					id: "1733",
-					agenda_slug: "hamzas_awesome_agenda",
-					full_name: "Dave Bradley",
-					email: "dave@gmail.com",
-					phone: "7864445566",
-					address: "47568 NW 34ST, 33434 FL, USA",
-					created_at: "2020-12-22 23:55:32"
-				}
-			]
+			contacts: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
+			syncData: () => {
+				fetch(`${baseURL}/agenda/${agenda_slug}`)
+					.then(response => {
+						if (!response.ok) throw new Error(response.statusText);
+						return response.json();
+					})
+					.then(data => setStore({ contacts: data }))
+					.catch(err => console.error(err));
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
+			},
+			addContact: contact => {
+				fetch(`${baseURL}/`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(contact)
+				})
+					.then(response => {
+						if (!response.ok) throw new Error(`${response.status}  ${response.statusText}`);
+						return response.json();
+					})
+					.then(data => getActions().syncData())
+					.catch(err => console.error(err));
+			},
+			deleteContact: contactID => {
+				fetch(`${baseURL}/${contactID}`, {
+					method: "DELETE"
+				})
+					.then(response => {
+						if (!response.ok) throw new Error(response.statusText);
+						return response.json();
+					})
+					.then(data => getActions().syncData())
+					.catch(err => console.error(err));
 			},
 			changeColor: (index, color) => {
 				//get the store
