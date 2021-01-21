@@ -82,15 +82,22 @@ export const AddEditContact = () => {
 					/>
 				</div>
 				<button
-					onClick={e =>
+					onClick={e => {
+						// actions.editContact(theid, {
+						// 	agenda_slug: "hamzas_awesome_agenda",
+						// 	full_name: name,
+						// 	email: email,
+						// 	phone: phone,
+						// 	address: address
+						// });
 						actions.addContact({
 							agenda_slug: "hamzas_awesome_agenda",
 							full_name: name,
 							email: email,
 							phone: phone,
 							address: address
-						})
-					}
+						});
+					}}
 					type="submit"
 					className="btn btn-primary">
 					Submit

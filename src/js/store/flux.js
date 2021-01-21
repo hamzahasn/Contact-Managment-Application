@@ -48,6 +48,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => getActions().syncData())
 					.catch(err => console.error(err));
 			},
+			editContact: (contactID, contact) => {
+				fetch(`${baseURL}/${contactID}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(contact)
+				})
+					.then(response => {
+						if (!response.ok) throw new Error(response.statusText);
+						return response.json();
+					})
+					.then(data => getActions().syncData())
+					.catch(err => console.error(err));
+			},
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
